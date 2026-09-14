@@ -1,0 +1,1179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Smart Canteen - Menu</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+
+    background:
+        radial-gradient(circle at 10% 15%, #ffd6e7 0%, transparent 30%),
+        radial-gradient(circle at 90% 10%, #c9f2ff 0%, transparent 30%),
+        radial-gradient(circle at 15% 90%, #fff0b8 0%, transparent 30%),
+        radial-gradient(circle at 90% 85%, #ddd0ff 0%, transparent 30%),
+        linear-gradient(135deg, #fff5f8, #eefaff, #fffbea);
+
+    color: #30243a;
+}
+
+/* HEADER */
+
+.header {
+    background: linear-gradient(135deg, #ff6b9a, #d94670);
+
+    color: white;
+
+    padding: 22px 30px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    box-shadow: 0 5px 20px rgba(70,50,90,0.15);
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 28px;
+}
+
+.header-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.header-btn {
+    border: none;
+
+    background: white;
+    color: #d94670;
+
+    padding: 10px 16px;
+
+    border-radius: 22px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    text-decoration: none;
+}
+
+/* MAIN */
+
+.container {
+    max-width: 1100px;
+
+    margin: 30px auto;
+
+    padding: 0 20px;
+}
+
+.welcome {
+    text-align: center;
+
+    margin-bottom: 30px;
+}
+
+.welcome h2 {
+    margin-bottom: 8px;
+
+    font-size: 30px;
+}
+
+.welcome p {
+    color: #766c7d;
+}
+
+/* MENU */
+
+.menu-grid {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 20px;
+}
+
+.food-card {
+    background: white;
+
+    padding: 22px;
+
+    border-radius: 22px;
+
+    text-align: center;
+
+    box-shadow:
+        0 10px 30px rgba(70,50,90,0.10);
+
+    transition: 0.2s;
+}
+
+.food-card:hover {
+    transform: translateY(-5px);
+}
+
+.food-icon {
+    font-size: 55px;
+
+    margin-bottom: 10px;
+}
+
+.food-card h3 {
+    margin: 8px 0;
+
+    color: #352641;
+}
+
+.food-price {
+    color: #d35432;
+
+    font-size: 20px;
+
+    font-weight: bold;
+
+    margin: 10px 0 15px;
+}
+
+/* ADD BUTTON */
+
+.add-btn {
+    width: 100%;
+
+    border: none;
+
+    padding: 12px;
+
+    border-radius: 25px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #8068d8,
+            #5b48a8
+        );
+
+    color: white;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    font-size: 15px;
+
+    transition: 0.2s;
+}
+
+.add-btn:hover {
+    transform: scale(1.02);
+}
+
+/* CART */
+
+.cart-box {
+    background: white;
+
+    margin-top: 30px;
+
+    padding: 25px;
+
+    border-radius: 22px;
+
+    box-shadow:
+        0 10px 30px rgba(70,50,90,0.10);
+}
+
+.cart-box h2 {
+    margin-top: 0;
+}
+
+/* CART ITEM */
+
+.cart-item {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    padding: 15px 0;
+
+    border-bottom: 1px solid #eee7f2;
+
+    gap: 15px;
+}
+
+.cart-item:last-child {
+    border-bottom: none;
+}
+
+.cart-left {
+    flex: 1;
+}
+
+.cart-name {
+    font-weight: bold;
+
+    font-size: 17px;
+
+    margin-bottom: 6px;
+}
+
+.cart-price {
+    color: #d35432;
+
+    font-weight: bold;
+}
+
+/* CART QUANTITY */
+
+.cart-controls {
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+}
+
+.cart-qty-btn {
+    width: 34px;
+    height: 34px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: #f0eaff;
+
+    color: #5b48a8;
+
+    font-size: 20px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+}
+
+.cart-qty-btn:hover {
+    background: #dfd5ff;
+}
+
+.cart-quantity {
+    min-width: 28px;
+
+    text-align: center;
+
+    font-size: 17px;
+
+    font-weight: bold;
+}
+
+/* REMOVE */
+
+.remove-btn {
+    border: none;
+
+    background: #ffe0e0;
+
+    color: #c0392b;
+
+    padding: 8px 12px;
+
+    border-radius: 18px;
+
+    cursor: pointer;
+
+    font-weight: bold;
+}
+
+.remove-btn:hover {
+    background: #ffcaca;
+}
+
+/* TOTAL */
+
+.cart-total {
+    text-align: right;
+
+    font-size: 22px;
+
+    font-weight: bold;
+
+    margin-top: 15px;
+
+    color: #30243a;
+}
+
+/* PLACE ORDER */
+
+.place-btn {
+    display: block;
+
+    width: 100%;
+
+    margin-top: 20px;
+
+    border: none;
+
+    padding: 15px;
+
+    border-radius: 28px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #3f6f68,
+            #28504b
+        );
+
+    color: white;
+
+    font-size: 17px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.place-btn:hover {
+    opacity: 0.9;
+}
+
+/* EMPTY CART */
+
+.empty-cart {
+    text-align: center;
+
+    color: #777;
+
+    padding: 20px;
+}
+
+/* MOBILE */
+
+@media (max-width: 850px) {
+
+    .menu-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+@media (max-width: 550px) {
+
+    .header {
+        padding: 18px;
+
+        flex-direction: column;
+
+        gap: 12px;
+    }
+
+    .header h1 {
+        font-size: 22px;
+    }
+
+    .menu-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .container {
+        padding: 0 12px;
+    }
+
+    .cart-item {
+        flex-direction: column;
+
+        align-items: stretch;
+    }
+
+    .cart-controls {
+        justify-content: center;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- HEADER -->
+
+<header class="header">
+
+    <h1>
+        🍽️ Smart Canteen
+    </h1>
+
+    <div class="header-buttons">
+
+        <a
+            href="order-history.html"
+            class="header-btn">
+
+            📋 Order History
+
+        </a>
+
+    </div>
+
+</header>
+
+
+<!-- MAIN -->
+
+<div class="container">
+
+    <!-- WELCOME -->
+
+    <div class="welcome">
+
+        <h2 id="welcomeText">
+            Welcome Student!
+        </h2>
+
+        <p>
+            Select your favourite food and add it to your cart.
+        </p>
+
+    </div>
+
+
+    <!-- MENU -->
+
+    <div class="menu-grid">
+
+        <!-- FOOD 1 -->
+
+        <div class="food-card">
+
+            <div class="food-icon">
+                🍔
+            </div>
+
+            <h3>
+                Veg Burger
+            </h3>
+
+            <div class="food-price">
+                ₹50
+            </div>
+
+            <button
+                class="add-btn"
+                onclick="addToCart('Veg Burger', 50)">
+
+                🛒 Add to Cart
+
+            </button>
+
+        </div>
+
+
+        <!-- FOOD 2 -->
+
+        <div class="food-card">
+
+            <div class="food-icon">
+                🍕
+            </div>
+
+            <h3>
+                Pizza
+            </h3>
+
+            <div class="food-price">
+                ₹80
+            </div>
+
+            <button
+                class="add-btn"
+                onclick="addToCart('Pizza', 80)">
+
+                🛒 Add to Cart
+
+            </button>
+
+        </div>
+
+
+        <!-- FOOD 3 -->
+
+        <div class="food-card">
+
+            <div class="food-icon">
+                🍟
+            </div>
+
+            <h3>
+                French Fries
+            </h3>
+
+            <div class="food-price">
+                ₹40
+            </div>
+
+            <button
+                class="add-btn"
+                onclick="addToCart('French Fries', 40)">
+
+                🛒 Add to Cart
+
+            </button>
+
+        </div>
+
+
+        <!-- FOOD 4 -->
+
+        <div class="food-card">
+
+            <div class="food-icon">
+                🌯
+            </div>
+
+            <h3>
+                Veg Roll
+            </h3>
+
+            <div class="food-price">
+                ₹45
+            </div>
+
+            <button
+                class="add-btn"
+                onclick="addToCart('Veg Roll', 45)">
+
+                🛒 Add to Cart
+
+            </button>
+
+        </div>
+
+
+        <!-- FOOD 5 -->
+
+        <div class="food-card">
+
+            <div class="food-icon">
+                🥪
+            </div>
+
+            <h3>
+                Sandwich
+            </h3>
+
+            <div class="food-price">
+                ₹35
+            </div>
+
+            <button
+                class="add-btn"
+                onclick="addToCart('Sandwich', 35)">
+
+                🛒 Add to Cart
+
+            </button>
+
+        </div>
+
+
+        <!-- FOOD 6 -->
+
+        <div class="food-card">
+
+            <div class="food-icon">
+                🥤
+            </div>
+
+            <h3>
+                Cool Drink
+            </h3>
+
+            <div class="food-price">
+                ₹30
+            </div>
+
+            <button
+                class="add-btn"
+                onclick="addToCart('Cool Drink', 30)">
+
+                🛒 Add to Cart
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- CART -->
+
+    <div class="cart-box">
+
+        <h2>
+            🛒 Your Cart
+        </h2>
+
+        <div id="cartItems">
+
+            <div class="empty-cart">
+                Your cart is empty.
+            </div>
+
+        </div>
+
+
+        <div class="cart-total">
+
+            Total:
+            ₹<span id="cartTotal">0</span>
+
+        </div>
+
+
+        <button
+            class="place-btn"
+            onclick="placeOrder()">
+
+            🎫 Place Order
+
+        </button>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* =========================================
+   STUDENT
+========================================= */
+
+let studentName =
+    localStorage.getItem("studentName") || "Student";
+
+
+document.getElementById("welcomeText").innerText =
+    "Welcome " + studentName + "!";
+
+
+/* =========================================
+   CART
+========================================= */
+
+let cart = [];
+
+
+/* =========================================
+   ADD TO CART
+========================================= */
+
+function addToCart(name, price) {
+
+    let existingItem =
+        cart.find(function(item) {
+
+            return item.name === name;
+
+        });
+
+
+    if (existingItem) {
+
+        existingItem.quantity += 1;
+
+    } else {
+
+        cart.push({
+
+            name: name,
+
+            price: Number(price),
+
+            quantity: 1
+
+        });
+
+    }
+
+
+    renderCart();
+
+}
+
+
+/* =========================================
+   INCREASE QUANTITY
+========================================= */
+
+function increaseQuantity(index) {
+
+    if (!cart[index]) {
+        return;
+    }
+
+
+    cart[index].quantity += 1;
+
+
+    renderCart();
+
+}
+
+
+/* =========================================
+   DECREASE QUANTITY
+========================================= */
+
+function decreaseQuantity(index) {
+
+    if (!cart[index]) {
+        return;
+    }
+
+
+    cart[index].quantity -= 1;
+
+
+    if (cart[index].quantity <= 0) {
+
+        cart.splice(index, 1);
+
+    }
+
+
+    renderCart();
+
+}
+
+
+/* =========================================
+   REMOVE CART ITEM
+========================================= */
+
+function removeFromCart(index) {
+
+    if (!cart[index]) {
+        return;
+    }
+
+
+    cart.splice(index, 1);
+
+
+    renderCart();
+
+}
+
+
+/* =========================================
+   DISPLAY CART
+========================================= */
+
+function renderCart() {
+
+    let container =
+        document.getElementById("cartItems");
+
+
+    let totalElement =
+        document.getElementById("cartTotal");
+
+
+    container.innerHTML = "";
+
+
+    if (cart.length === 0) {
+
+        container.innerHTML = `
+
+            <div class="empty-cart">
+
+                Your cart is empty.
+
+            </div>
+
+        `;
+
+
+        totalElement.innerText = "0";
+
+
+        return;
+
+    }
+
+
+    let total = 0;
+
+
+    cart.forEach(function(item, index) {
+
+        let itemTotal =
+            Number(item.price) *
+            Number(item.quantity);
+
+
+        total += itemTotal;
+
+
+        container.innerHTML += `
+
+            <div class="cart-item">
+
+                <div class="cart-left">
+
+                    <div class="cart-name">
+
+                        ${escapeHTML(item.name)}
+
+                    </div>
+
+                    <div class="cart-price">
+
+                        ₹${itemTotal}
+
+                    </div>
+
+                </div>
+
+
+                <div class="cart-controls">
+
+                    <button
+                        class="cart-qty-btn"
+                        onclick="decreaseQuantity(${index})">
+
+                        −
+
+                    </button>
+
+
+                    <span class="cart-quantity">
+
+                        ${item.quantity}
+
+                    </span>
+
+
+                    <button
+                        class="cart-qty-btn"
+                        onclick="increaseQuantity(${index})">
+
+                        +
+
+                    </button>
+
+                </div>
+
+
+                <button
+                    class="remove-btn"
+                    onclick="removeFromCart(${index})">
+
+                    Remove
+
+                </button>
+
+            </div>
+
+        `;
+
+    });
+
+
+    totalElement.innerText = total;
+
+}
+
+
+/* =========================================
+   PLACE ORDER
+========================================= */
+
+async function placeOrder() {
+
+    /* CHECK CART */
+
+    if (cart.length === 0) {
+
+        alert(
+            "Please add food to your cart first."
+        );
+
+        return;
+
+    }
+
+
+    /* GET OLD ORDER HISTORY */
+
+    let orderHistory = [];
+
+
+    try {
+
+        orderHistory =
+            JSON.parse(
+                localStorage.getItem("orderHistory")
+            ) || [];
+
+    } catch (error) {
+
+        orderHistory = [];
+
+    }
+
+
+    /* =================================
+       TOKEN NUMBER
+    ================================= */
+
+    let tokenNumber = 1;
+
+
+    if (orderHistory.length > 0) {
+
+        let lastOrder =
+            orderHistory[orderHistory.length - 1];
+
+
+        let lastToken =
+            Number(lastOrder.tokenNumber) || 0;
+
+
+        tokenNumber =
+            lastToken + 1;
+
+    }
+
+
+    /* =================================
+       ORDER ID
+    ================================= */
+
+    let orderId =
+        "ORD" + Date.now();
+
+
+    /* =================================
+       TOTAL
+    ================================= */
+
+    let total = 0;
+
+
+    cart.forEach(function(item) {
+
+        total +=
+            Number(item.price) *
+            Number(item.quantity);
+
+    });
+
+
+    /* =================================
+       DATE
+    ================================= */
+
+    let date =
+        new Date().toLocaleString();
+
+
+    /* =================================
+       CREATE ORDER
+    ================================= */
+
+    let newOrder = {
+
+        orderId: orderId,
+
+        tokenNumber: tokenNumber,
+
+        student: studentName,
+
+        items: cart.map(function(item) {
+
+            return {
+
+                name: item.name,
+
+                price: Number(item.price),
+
+                quantity: Number(item.quantity)
+
+            };
+
+        }),
+
+        total: total,
+
+        status: "Pending",
+
+        date: date
+
+    };
+
+
+    /* =================================
+       SEND ORDER TO BACKEND
+    ================================= */
+
+    try {
+
+        let response = await fetch(
+            "http://localhost:3000/api/orders",
+            {
+
+                method: "POST",
+
+                headers: {
+
+                    "Content-Type":
+                        "application/json"
+
+                },
+
+                body:
+                    JSON.stringify(newOrder)
+
+            }
+        );
+
+
+        let result =
+            await response.json();
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                result.message ||
+                "Order failed"
+            );
+
+        }
+
+
+        /* =================================
+           SAVE LOCAL ORDER HISTORY
+        ================================= */
+
+        orderHistory.push(newOrder);
+
+
+        localStorage.setItem(
+            "orderHistory",
+            JSON.stringify(orderHistory)
+        );
+
+
+        /* =================================
+           SUCCESS
+        ================================= */
+
+        alert(
+            "🎉 Order placed successfully!\n\n" +
+            "🎫 Token No: " +
+            tokenNumber +
+            "\n\n" +
+            "Order ID: " +
+            orderId
+        );
+
+
+        /* CLEAR CART */
+
+        cart = [];
+
+
+        renderCart();
+
+
+        /* GO TO ORDER HISTORY */
+
+        window.location.href =
+            "order-history.html";
+
+    }
+
+
+    catch (error) {
+
+        console.error(
+            "Backend Error:",
+            error
+        );
+
+
+        alert(
+            "❌ Backend connection failed.\n\n" +
+            "Please make sure the Node.js backend is running on port 3000.\n\n" +
+            "Error: " +
+            error.message
+        );
+
+    }
+
+}
+
+
+/* =========================================
+   SAFE HTML
+========================================= */
+
+function escapeHTML(value) {
+
+    if (
+        value === undefined ||
+        value === null
+    ) {
+
+        return "";
+
+    }
+
+
+    return String(value)
+
+        .replace(/&/g, "&amp;")
+
+        .replace(/</g, "&lt;")
+
+        .replace(/>/g, "&gt;")
+
+        .replace(/"/g, "&quot;")
+
+        .replace(/'/g, "&#039;");
+
+}
+
+</script>
+
+</body>
+
+</html>

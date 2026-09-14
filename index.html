@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Smart Canteen - Order food easily and enjoy quick pickup.">
+    <title>Smart Canteen</title>
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        font-family: Arial, sans-serif;
+        background:
+            radial-gradient(circle at 10% 15%, #ffd6e7 0%, transparent 30%),
+            radial-gradient(circle at 90% 10%, #c9f2ff 0%, transparent 30%),
+            radial-gradient(circle at 15% 90%, #fff0b8 0%, transparent 30%),
+            radial-gradient(circle at 90% 85%, #ddd0ff 0%, transparent 30%),
+            linear-gradient(135deg, #fff5f8, #eefaff, #fffbea);
+    }
+
+    .box {
+        width: 100%;
+        max-width: 650px;
+        padding: 50px 40px;
+        text-align: center;
+        background: rgba(255, 255, 255, 0.92);
+        border-radius: 32px;
+        box-shadow: 0 25px 60px rgba(70, 50, 90, 0.18);
+        backdrop-filter: blur(15px);
+    }
+
+    .logo {
+        width: 115px;
+        height: 115px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        font-size: 65px;
+        background: linear-gradient(135deg, #ffe0a8, #ffd0df);
+    }
+
+    h1 {
+        margin: 22px 0 8px;
+        font-size: 46px;
+        color: #30243a;
+    }
+
+    .welcome {
+        font-size: 23px;
+        font-weight: bold;
+        color: #4d4055;
+    }
+
+    .description {
+        max-width: 500px;
+        margin: 15px auto 30px;
+        font-size: 17px;
+        line-height: 1.7;
+        color: #6d6472;
+    }
+
+    .login-btn {
+        display: inline-block;
+        padding: 16px 42px;
+        border-radius: 30px;
+        color: white;
+        background: linear-gradient(135deg, #ff7b54, #ff4f81);
+        font-size: 18px;
+        font-weight: bold;
+        text-decoration: none;
+    }
+
+    .features {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+        margin-top: 38px;
+    }
+
+    .feature {
+        padding: 15px 10px;
+        border-radius: 18px;
+        background: white;
+        color: #55495d;
+        font-size: 14px;
+        font-weight: bold;
+        box-shadow: 0 7px 18px rgba(70, 50, 90, 0.08);
+    }
+
+    .admin-link {
+        display: block;
+        margin-top: 25px;
+        color: #635773;
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+    .footer {
+        margin-top: 25px;
+        color: #958c99;
+        font-size: 13px;
+    }
+
+    @media (max-width: 600px) {
+        .box {
+            padding: 40px 20px;
+        }
+
+        h1 {
+            font-size: 36px;
+        }
+
+        .features {
+            grid-template-columns: 1fr;
+        }
+
+        .login-btn {
+            width: 100%;
+        }
+    }
+</style>
+
+</head>
+
+<body>
+<div class="box">
+
+    <div class="logo">🍽️</div>
+
+    <h1>Smart Canteen</h1>
+
+    <p class="welcome">Welcome! 👋</p>
+
+    <p class="description">
+        Order your favourite food easily,
+        skip the queue and enjoy a
+        quick & hassle-free pickup! 🍕✨
+    </p>
+
+    <a href="login.html" class="login-btn">
+        🔐 Student Login
+    </a>
+
+    <div class="features">
+
+        <div class="feature">
+            🍕 Fresh Food
+        </div>
+
+        <div class="feature">
+            ⚡ Quick Order
+        </div>
+
+        <div class="feature">
+            🎫 Easy Pickup
+        </div>
+
+    </div>
+
+    <a href="admin-login.html" class="admin-link">
+        👨‍💼 Admin Login
+    </a>
+
+    <div class="footer">
+        Smart • Fast • Delicious ❤️
+    </div>
+
+</div>
+
+</body>
+
+</html>

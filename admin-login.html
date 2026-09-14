@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Smart Canteen - Admin Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+
+            background:
+                radial-gradient(circle at 10% 15%, #ffd6e7 0%, transparent 30%),
+                radial-gradient(circle at 90% 10%, #c9f2ff 0%, transparent 30%),
+                radial-gradient(circle at 15% 90%, #fff0b8 0%, transparent 30%),
+                radial-gradient(circle at 90% 85%, #ddd0ff 0%, transparent 30%),
+                linear-gradient(135deg, #fff5f8, #eefaff, #fffbea);
+        }
+
+        .admin-box {
+            width: 100%;
+            max-width: 430px;
+            padding: 40px 35px;
+            text-align: center;
+
+            background: rgba(255,255,255,0.90);
+            border-radius: 28px;
+
+            box-shadow: 0 20px 50px rgba(70,50,90,0.18);
+            backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            width: 90px;
+            height: 90px;
+            margin: auto;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+            font-size: 48px;
+
+            background: linear-gradient(135deg, #ddd0ff, #c9f2ff);
+        }
+
+        h1 {
+            margin: 20px 0 8px;
+            color: #30243a;
+            font-size: 32px;
+        }
+
+        .subtitle {
+            margin: 0 0 25px;
+            color: #766c7d;
+            font-size: 15px;
+        }
+
+        .input-group {
+            text-align: left;
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 7px;
+            color: #55495d;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid #eee7f2;
+            border-radius: 14px;
+            outline: none;
+            font-size: 16px;
+            background: white;
+        }
+
+        .login-btn {
+            width: 100%;
+            border: none;
+            padding: 15px;
+            margin-top: 5px;
+            border-radius: 28px;
+
+            color: white;
+            background: linear-gradient(135deg, #8068d8, #5b48a8);
+
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .hint {
+            margin-top: 22px;
+            padding: 12px;
+            border-radius: 14px;
+
+            background: #f4f0ff;
+            color: #6551a8;
+            font-size: 13px;
+        }
+
+        .back {
+            display: block;
+            margin-top: 23px;
+
+            color: #635773;
+            text-decoration: none;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="admin-box">
+
+    <div class="logo">👨‍💼</div>
+
+    <h1>Admin Login</h1>
+
+    <p class="subtitle">
+        Smart Canteen Management Panel
+    </p>
+
+    <div class="input-group">
+
+        <label for="username">
+            👤 Admin Username
+        </label>
+
+        <input
+            type="text"
+            id="username"
+            placeholder="Enter admin username">
+
+    </div>
+
+    <div class="input-group">
+
+        <label for="password">
+            🔑 Admin Password
+        </label>
+
+        <input
+            type="password"
+            id="password"
+            placeholder="Enter admin password">
+
+    </div>
+
+    <button
+        class="login-btn"
+        onclick="adminLogin()">
+
+        🔐 Admin Login
+
+    </button>
+
+    <div class="hint">
+        Demo Username: <strong>admin</strong><br>
+        Demo Password: <strong>admin123</strong>
+    </div>
+
+    <a href="index.html" class="back">
+        ← Back to Home
+    </a>
+
+</div>
+
+<script>
+
+function adminLogin() {
+
+    var username =
+        document.getElementById("username").value.trim();
+
+    var password =
+        document.getElementById("password").value;
+
+    if (username === "admin" && password === "admin123") {
+
+        localStorage.setItem("adminLoggedIn", "true");
+
+        window.location.href = "admin.html";
+
+    } else {
+
+        alert("Invalid Username or Password");
+
+    }
+}
+
+</script>
+
+</body>
+</html>

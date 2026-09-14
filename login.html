@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Smart Canteen - Student Login</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+
+    background:
+        radial-gradient(circle at 10% 15%, #ffd6e7 0%, transparent 30%),
+        radial-gradient(circle at 90% 10%, #c9f2ff 0%, transparent 30%),
+        radial-gradient(circle at 15% 90%, #fff0b8 0%, transparent 30%),
+        radial-gradient(circle at 90% 85%, #ddd0ff 0%, transparent 30%),
+        linear-gradient(135deg, #fff5f8, #eefaff, #fffbea);
+}
+
+.login-box {
+    width: 100%;
+    max-width: 430px;
+    padding: 35px;
+
+    background: rgba(255,255,255,0.92);
+
+    border-radius: 28px;
+
+    box-shadow:
+        0 15px 40px rgba(70,50,90,0.18);
+
+    backdrop-filter: blur(10px);
+}
+
+h1 {
+    text-align: center;
+    margin: 0 0 8px;
+
+    font-size: 34px;
+    color: #30243a;
+}
+
+.subtitle {
+    text-align: center;
+    color: #766c7d;
+    margin-bottom: 30px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+
+    color: #4e4357;
+    font-weight: bold;
+}
+
+input {
+    width: 100%;
+
+    padding: 14px;
+
+    margin-bottom: 18px;
+
+    border: 2px solid #e7e0ef;
+    border-radius: 14px;
+
+    font-size: 15px;
+
+    outline: none;
+}
+
+input:focus {
+    border-color: #8068d8;
+}
+
+.login-btn {
+    width: 100%;
+
+    border: none;
+
+    padding: 15px;
+
+    border-radius: 30px;
+
+    font-size: 17px;
+    font-weight: bold;
+
+    color: white;
+
+    cursor: pointer;
+
+    background:
+        linear-gradient(
+            135deg,
+            #8068d8,
+            #5b45b5
+        );
+
+    box-shadow:
+        0 8px 20px rgba(91,69,181,0.25);
+}
+
+.login-btn:hover {
+    transform: translateY(-2px);
+}
+
+.admin-link {
+    display: block;
+
+    margin-top: 20px;
+
+    text-align: center;
+
+    color: #635773;
+
+    text-decoration: none;
+
+    font-weight: bold;
+}
+
+.error {
+    text-align: center;
+
+    color: #e04458;
+
+    font-size: 14px;
+
+    margin-bottom: 15px;
+
+    display: none;
+}
+
+@media (max-width: 500px) {
+
+    .login-box {
+        margin: 15px;
+        padding: 28px 20px;
+    }
+
+    h1 {
+        font-size: 29px;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="login-box">
+
+<h1>🎓 Student Login</h1>
+
+<p class="subtitle">
+    Welcome to Smart Canteen 🍽️
+</p>
+
+<div id="error" class="error">
+    Please enter your name.
+</div>
+
+<form onsubmit="studentLogin(event)">
+
+    <label for="studentName">
+        👤 Student Name
+    </label>
+
+    <input
+        type="text"
+        id="studentName"
+        placeholder="Enter your name"
+        required
+    >
+
+    <label for="studentId">
+        🆔 Student ID
+    </label>
+
+    <input
+        type="text"
+        id="studentId"
+        placeholder="Enter your student ID"
+        required
+    >
+
+    <button
+        type="submit"
+        class="login-btn">
+
+        🚀 Login
+
+    </button>
+
+</form>
+
+<a
+    href="admin-login.html"
+    class="admin-link">
+
+    👨‍💼 Admin Login
+
+</a>
+
+</div>
+
+<script>
+
+function studentLogin(event) {
+
+    event.preventDefault();
+
+    let studentName =
+        document.getElementById("studentName").value.trim();
+
+    let studentId =
+        document.getElementById("studentId").value.trim();
+
+    let error =
+        document.getElementById("error");
+
+    if (studentName === "" || studentId === "") {
+
+        error.innerText =
+            "Please enter Student Name and Student ID.";
+
+        error.style.display = "block";
+
+        return;
+    }
+
+    /*
+       Save student details
+    */
+
+    localStorage.setItem(
+        "studentName",
+        studentName
+    );
+
+    localStorage.setItem(
+        "studentId",
+        studentId
+    );
+
+    localStorage.setItem(
+        "studentLoggedIn",
+        "true"
+    );
+
+    /*
+       Go to student menu
+    */
+
+    window.location.href =
+        "menu.html";
+
+}
+
+</script>
+
+</body>
+
+</html>
