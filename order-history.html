@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Smart Canteen - Order History</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            padding: 40px 20px;
+            font-family: Arial, sans-serif;
+
+            background:
+                radial-gradient(circle at 10% 15%, #ffd6e7 0%, transparent 30%),
+                radial-gradient(circle at 90% 10%, #c9f2ff 0%, transparent 30%),
+                radial-gradient(circle at 15% 90%, #fff0b8 0%, transparent 30%),
+                radial-gradient(circle at 90% 85%, #ddd0ff 0%, transparent 30%),
+                linear-gradient(135deg, #fff5f8, #eefaff, #fffbea);
+        }
+
+        .history-box {
+            max-width: 850px;
+            margin: auto;
+            background: rgba(255, 255, 255, 0.90);
+            padding: 35px;
+            border-radius: 28px;
+            box-shadow: 0 15px 40px rgba(80, 60, 100, 0.18);
+        }
+
+        h1 {
+            text-align: center;
+            margin: 0 0 8px;
+            font-size: 38px;
+            color: #30243a;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #766c7d;
+            margin-bottom: 30px;
+        }
+
+        .order-card {
+            background: linear-gradient(
+                135deg,
+                rgba(255,255,255,0.96),
+                rgba(248,244,255,0.96)
+            );
+
+            padding: 23px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+            border: 1px solid #eee7f7;
+            box-shadow: 0 8px 20px rgba(80,60,100,0.10);
+        }
+
+        .order-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 15px;
+        }
+
+        .token {
+            font-size: 24px;
+            font-weight: bold;
+            color: #ff4f81;
+        }
+
+        .order-id {
+            font-size: 14px;
+            color: #777;
+            margin-top: 5px;
+        }
+
+        .status {
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .status-pending {
+            background: #fff0c7;
+            color: #9a6a00;
+        }
+
+        .status-preparing {
+            background: #dcecff;
+            color: #28629b;
+        }
+
+        .status-ready {
+            background: #dff7ed;
+            color: #267052;
+        }
+
+        .status-completed {
+            background: #e8ddff;
+            color: #6845a5;
+        }
+
+        .date {
+            color: #777;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .student {
+            color: #55495d;
+            font-size: 15px;
+            margin-bottom: 12px;
+        }
+
+        .item {
+            display: flex;
+            justify-content: space-between;
+            padding: 9px 0;
+            border-bottom: 1px solid #eee8f3;
+            color: #5f5369;
+            font-size: 15px;
+        }
+
+        .total {
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 15px;
+            text-align: right;
+
+            background: linear-gradient(
+                135deg,
+                #fff4c7,
+                #ffe9d6
+            );
+
+            color: #30243a;
+            font-size: 21px;
+            font-weight: bold;
+        }
+
+        .empty {
+            text-align: center;
+            padding: 45px 10px;
+            color: #777;
+            font-size: 20px;
+        }
+
+        .buttons {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            border: none;
+            padding: 14px 25px;
+            margin: 6px;
+            border-radius: 28px;
+            color: white;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .menu-btn {
+            background: linear-gradient(
+                135deg,
+                #3f6f68,
+                #28504b
+            );
+        }
+
+        .clear-btn {
+            background: linear-gradient(
+                135deg,
+                #ff6b7a,
+                #e04458
+            );
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="history-box">
+
+    <h1>📋 Order History</h1>
+
+    <p class="subtitle">
+        Your previous orders
+    </p>
+
+    <div id="orders"></div>
+
+    <div class="buttons">
+
+        <a href="menu.html" class="btn menu-btn">
+            🍽️ Order Food
+        </a>
+
+        <button
+            class="btn clear-btn"
+            onclick="clearHistory()">
+            🗑️ Clear History
+        </button>
+
+    </div>
+
+</div>
+
+<script>
+
+function getOrders() {
+
+    try {
+
+        return JSON.parse(
+            localStorage.getItem("orderHistory")
+        ) || [];
+
+    } catch (error) {
+
+        return [];
+
+    }
+}
+
+
+function displayHistory() {
+
+    const container =
+        document.getElementById("orders");
+
+    const orders = getOrders();
+
+    container.innerHTML = "";
+
+
+    if (orders.length === 0) {
+
+        container.innerHTML = `
+            <div class="empty">
+                📋 No orders yet.
+                <br><br>
+                Start ordering some delicious food!
+            </div>
+        `;
+
+        return;
+    }
+
+
+    const latestOrders = [...orders].reverse();
+
+
+    latestOrders.forEach(function(order) {
+
+        let itemsHTML = "";
+
+
+        if (Array.isArray(order.items)) {
+
+            order.items.forEach(function(item) {
+
+                const quantity =
+                    Number(item.quantity) || 1;
+
+                const price =
+                    Number(item.price) || 0;
+
+                const total =
+                    price * quantity;
+
+
+                itemsHTML += `
+                    <div class="item">
+
+                        <span>
+                            🍽️ ${escapeHTML(item.name)}
+                            × ${quantity}
+                        </span>
+
+                        <strong>
+                            ₹${total}
+                        </strong>
+
+                    </div>
+                `;
+
+            });
+
+        }
+
+
+        let status =
+            order.status || "Pending";
+
+        let statusClass =
+            "status-pending";
+
+        let statusText =
+            "⏳ Order Received";
+
+
+        if (status === "Preparing") {
+
+            statusClass =
+                "status-preparing";
+
+            statusText =
+                "👨‍🍳 Food is Preparing";
+
+        }
+
+        else if (status === "Ready") {
+
+            statusClass =
+                "status-ready";
+
+            statusText =
+                "🎫 Food is Ready";
+
+        }
+
+        else if (status === "Completed") {
+
+            statusClass =
+                "status-completed";
+
+            statusText =
+                "✅ Order Completed";
+
+        }
+
+
+        container.innerHTML += `
+
+            <div class="order-card">
+
+                <div class="order-top">
+
+                    <div>
+
+                        <div class="token">
+
+                            🎫 Token No:
+                            ${escapeHTML(order.tokenNumber)}
+
+                        </div>
+
+                        <div class="order-id">
+
+                            Order ID:
+                            ${escapeHTML(order.orderId)}
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="status ${statusClass}">
+
+                        ${statusText}
+
+                    </div>
+
+                </div>
+
+
+                <div class="date">
+
+                    🕒 ${escapeHTML(order.date)}
+
+                </div>
+
+
+                <div class="student">
+
+                    👨‍🎓 Student:
+
+                    <strong>
+                        ${escapeHTML(order.student)}
+                    </strong>
+
+                </div>
+
+
+                ${itemsHTML}
+
+
+                <div class="total">
+
+                    Total:
+                    ₹${Number(order.total) || 0}
+
+                </div>
+
+            </div>
+        `;
+
+    });
+
+}
+
+
+function clearHistory() {
+
+    if (
+        confirm(
+            "Are you sure you want to clear all order history?"
+        )
+    ) {
+
+        localStorage.removeItem("orderHistory");
+
+        displayHistory();
+
+    }
+
+}
+
+
+function escapeHTML(value) {
+
+    if (
+        value === undefined ||
+        value === null
+    ) {
+
+        return "";
+
+    }
+
+    return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
+}
+
+
+displayHistory();
+
+setInterval(
+    displayHistory,
+    2000
+);
+
+</script>
+
+</body>
+
+</html>
